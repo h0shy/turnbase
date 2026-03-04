@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: turnbase
+    runtime: node
+    buildCommand: npm install
+    startCommand: npx tsx src/index.ts
+    envVars:
+      - key: NODE_ENV
+        value: production
+    autoDeploy: true
