@@ -52,6 +52,7 @@ export interface Session {
   players: string[];
   maxPlayers: number;
   state: unknown;
+  initialState: unknown; // stored at game start for replay verification
   stateHash: string;
   transcript: TranscriptEntry[];
   status: 'waiting' | 'active' | 'terminal';

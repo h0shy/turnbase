@@ -1,8 +1,10 @@
 import { chessEngine } from './chess';
+import { kuhnPokerEngine } from './kuhn-poker';
 import type { Engine } from './types';
 
 const registry: Record<string, Engine> = {
   chess: chessEngine as Engine,
+  'kuhn-poker': kuhnPokerEngine as Engine,
 };
 
 export function getEngine(name: string): Engine | undefined {

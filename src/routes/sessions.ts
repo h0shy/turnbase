@@ -37,6 +37,7 @@ sessions.post('/', async (c) => {
     players: [],
     maxPlayers: engine.maxPlayers,
     state: null,
+    initialState: null,
     stateHash: '',
     transcript: [],
     status: 'waiting',
@@ -74,6 +75,8 @@ sessions.get('/:id', (c) => {
     stateHash: session.stateHash || null,
     result: session.result,
     createdAt: session.createdAt,
+    // Expose initial state for independent replay once the game is over
+    verificationData: session.status === 'terminal' ? { initialState: session.initialState } : undefined,
   });
 });
 
@@ -105,6 +108,7 @@ sessions.post('/:id/join', async (c) => {
     updated = {
       ...updated,
       state: initialState,
+      initialState,
       stateHash: hashState(engine.serialize(initialState)),
       status: 'active',
     };
