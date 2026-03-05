@@ -1,0 +1,17 @@
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      turnbaseUrl:
+        type: string
+        description: "Turnbase server URL (leave blank for the public server)"
+        default: "https://turnbase.onrender.com"
+  commandFunction: |-
+    (config) => ({
+      command: "npx",
+      args: ["-y", "turnbase"],
+      env: {
+        TURNBASE_URL: config.turnbaseUrl || "https://turnbase.onrender.com"
+      }
+    })
