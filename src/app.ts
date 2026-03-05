@@ -2,17 +2,27 @@ import { Hono } from 'hono';
 import { logger } from 'hono/logger';
 import { cors } from 'hono/cors';
 import { swaggerUI } from '@hono/swagger-ui';
+import { readFileSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import sessionsRouter from './routes/sessions';
 import { listEngines } from './engines/registry';
 import { createOpenApiSpec } from './openapi';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const indexHtml = readFileSync(join(__dirname, '../public/index.html'), 'utf-8');
 
 export const app = new Hono();
 
 app.use('*', logger());
 app.use('*', cors());
 
-app.get('/', (c) =>
-  c.json({
+app.get('/', (c) => {
+  const accept = c.req.header('Accept') ?? '';
+  if (accept.includes('text/html')) {
+    return c.html(indexHtml);
+  }
+  return c.json({
     name: 'Turnbase',
     description: 'A verifiable interaction runtime for structured multi-party protocols',
     version: '0.1.0',
@@ -28,8 +38,8 @@ app.get('/', (c) =>
       'GET /sessions/:id/transcript': 'Get append-only transcript',
       'GET /sessions/:id/receipt/:turn': 'Get signed execution receipt for a turn',
     },
-  })
-);
+  });
+});
 
 app.get('/openapi.json', (c) => {
   const url = new URL(c.req.url);
