@@ -9,13 +9,13 @@
 - [x] Kuhn Poker engine (proves observation scoping hides private state)
 - [x] Registered in engine registry
 
-### Phase 2: ERC-8004 on-chain identity + EIP-712 signing
+### Phase 2: ERC-8004 on-chain identity + EIP-712 signing — DONE
 - [x] Replace HMAC-SHA256 in signing.ts with EIP-712 structured data signing
 - [x] Receipts signed with turnbase's Ethereum key, verifiable by anyone
 - [x] Add signerAddress to Receipt type
-- [x] .well-known/agent-registration.json endpoint
+- [x] .well-known/agent-registration.json endpoint (full registration-v1 spec)
 - [x] Registration script (scripts/register-agent.ts)
-- [ ] Register turnbase as an ERC-8004 agent on Base (run script with funded wallet)
+- [x] Registered on Base — tx 0xc86917304e28c3a6e2759d5272bd90f8a62615ca294100ffa804a9ab4a509758
 - [ ] Add TURNBASE_PRIVATE_KEY to Render environment
 - [ ] Optional: post game results to ERC-8004 Reputation Registry
 
