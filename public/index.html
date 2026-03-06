@@ -361,7 +361,7 @@
     <div class="card">
       <div class="card-icon">◈</div>
       <div class="card-title">Verifiable receipts</div>
-      <div class="card-text">Every state transition produces a signed receipt: action, state hashes before and after, engine version, config hash, timestamp. Any third party can independently replay the game from the transcript.</div>
+      <div class="card-text">Every state transition produces an EIP-712 signed receipt: action, state hashes before and after, engine version, config hash, timestamp, and signer address. Anyone can verify signatures against the on-chain agent identity.</div>
     </div>
   </div>
 </div>
@@ -444,9 +444,9 @@
       <div class="card-text">Kuhn Poker engine proves observation scoping works — each player sees only their own card. The server enforces information asymmetry at the protocol level.</div>
     </div>
     <div class="card">
-      <div class="card-icon">◌</div>
+      <div class="card-icon">◑</div>
       <div class="card-title">Phase 2 — ERC-8004 identity</div>
-      <div class="card-text">Register Turnbase as an on-chain agent via ERC-8004. Replace HMAC with EIP-712 signatures verifiable against the on-chain identity registry. Receipts become independently verifiable by anyone.</div>
+      <div class="card-text">EIP-712 receipt signing is live — every receipt includes a verifiable signature and signer address. Next: register Turnbase as an on-chain agent on Base via the ERC-8004 Identity Registry and link reputation.</div>
     </div>
   </div>
 </div>

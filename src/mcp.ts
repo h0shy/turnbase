@@ -271,7 +271,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
       name: 'get_receipt',
       description:
         'Get the signed execution receipt for a specific turn. ' +
-        'Contains the action, player, before/after state hashes, engine version, config hash, timestamp, and HMAC signature.',
+        'Contains the action, player, before/after state hashes, engine version, config hash, timestamp, EIP-712 signature, and signer address.',
       inputSchema: {
         type: 'object',
         required: ['sessionId', 'turn'],

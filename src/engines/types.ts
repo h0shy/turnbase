@@ -31,6 +31,7 @@ export interface Receipt {
   configHash: string;
   timestamp: number;
   signature: string;
+  signerAddress: string;
 }
 
 export interface TranscriptEntry {

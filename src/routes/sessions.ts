@@ -2,7 +2,7 @@ import { Hono } from 'hono';
 import { v4 as uuidv4 } from 'uuid';
 import { getEngine, listEngines } from '../engines/registry';
 import { getSession, setSession } from '../store';
-import { signPayload, hashState, hashConfig } from '../signing';
+import { signPayload, hashState, hashConfig, getSignerAddress } from '../signing';
 import type { Session, TranscriptEntry, Receipt } from '../engines/types';
 
 const sessions = new Hono();
@@ -205,7 +205,11 @@ sessions.post('/:id/actions', async (c) => {
     timestamp,
   };
 
-  const receipt: Receipt = { ...receiptPayload, signature: signPayload(receiptPayload) };
+  const receipt: Receipt = {
+    ...receiptPayload,
+    signature: await signPayload(receiptPayload),
+    signerAddress: getSignerAddress(),
+  };
 
   const entry: TranscriptEntry = {
     turn,

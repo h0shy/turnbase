@@ -7,6 +7,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sessionsRouter from './routes/sessions';
 import { listEngines } from './engines/registry';
+import { getSignerAddress } from './signing';
 import { createOpenApiSpec } from './openapi';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -25,7 +26,8 @@ app.get('/', (c) => {
   return c.json({
     name: 'Turnbase',
     description: 'A verifiable interaction runtime for structured multi-party protocols',
-    version: '0.1.0',
+    version: '0.1.1',
+    signerAddress: getSignerAddress(),
     engines: listEngines(),
     docs: '/docs',
     spec: '/openapi.json',
@@ -47,5 +49,20 @@ app.get('/openapi.json', (c) => {
 });
 
 app.get('/docs', swaggerUI({ url: '/openapi.json' }));
+
+// ERC-8004 agent identity — domain verification
+app.get('/.well-known/agent-registration.json', (c) => {
+  return c.json({
+    agentRegistry: 'eip155:8453:0x8004A169FB4a3325136EB29fA0ceB6D2e539a432',
+    owner: getSignerAddress(),
+    services: [
+      {
+        name: 'Turnbase API',
+        endpoint: 'https://turnbase.app',
+        version: '0.1.1',
+      },
+    ],
+  });
+});
 
 app.route('/sessions', sessionsRouter);

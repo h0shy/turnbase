@@ -10,10 +10,13 @@
 - [x] Registered in engine registry
 
 ### Phase 2: ERC-8004 on-chain identity + EIP-712 signing
-- [ ] Register turnbase as an ERC-8004 agent (Base, cheapest chain)
-- [ ] Replace HMAC-SHA256 in signing.ts with EIP-712 structured data signing
-- [ ] Receipts signed with turnbase's Ethereum key, verifiable against on-chain identity
-- [ ] Add signerAddress to Receipt type
+- [x] Replace HMAC-SHA256 in signing.ts with EIP-712 structured data signing
+- [x] Receipts signed with turnbase's Ethereum key, verifiable by anyone
+- [x] Add signerAddress to Receipt type
+- [x] .well-known/agent-registration.json endpoint
+- [x] Registration script (scripts/register-agent.ts)
+- [ ] Register turnbase as an ERC-8004 agent on Base (run script with funded wallet)
+- [ ] Add TURNBASE_PRIVATE_KEY to Render environment
 - [ ] Optional: post game results to ERC-8004 Reputation Registry
 
 ### Phase 3 (deferred): ML-DSA-65
