@@ -12,6 +12,7 @@ import { createOpenApiSpec } from './openapi';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const indexHtml = readFileSync(join(__dirname, '../public/index.html'), 'utf-8');
+const pkg = JSON.parse(readFileSync(join(__dirname, '../package.json'), 'utf-8'));
 
 export const app = new Hono();
 
@@ -26,7 +27,7 @@ app.get('/', (c) => {
   return c.json({
     name: 'Turnbase',
     description: 'A verifiable interaction runtime for structured multi-party protocols',
-    version: '0.1.1',
+    version: pkg.version,
     signerAddress: getSignerAddress(),
     engines: listEngines(),
     docs: '/docs',
@@ -50,18 +51,28 @@ app.get('/openapi.json', (c) => {
 
 app.get('/docs', swaggerUI({ url: '/openapi.json' }));
 
-// ERC-8004 agent identity — domain verification
+// ERC-8004 agent identity — domain verification and discovery
 app.get('/.well-known/agent-registration.json', (c) => {
   return c.json({
+    type: 'https://eips.ethereum.org/EIPS/eip-8004#registration-v1',
+    name: 'Turnbase',
+    description: 'Verifiable interaction runtime for structured multi-party protocols. Deterministic rule enforcement, per-player observation scoping, and EIP-712 signed receipts.',
     agentRegistry: 'eip155:8453:0x8004A169FB4a3325136EB29fA0ceB6D2e539a432',
     owner: getSignerAddress(),
     services: [
       {
-        name: 'Turnbase API',
+        name: 'API',
         endpoint: 'https://turnbase.app',
-        version: '0.1.1',
+        version: pkg.version,
+      },
+      {
+        name: 'OpenAPI',
+        endpoint: 'https://turnbase.app/openapi.json',
+        version: pkg.version,
       },
     ],
+    active: true,
+    supportedTrust: ['reputation'],
   });
 });
 
