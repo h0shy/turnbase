@@ -289,7 +289,7 @@
 <nav>
   <a class="nav-logo" href="/">Turnbase</a>
   <div class="nav-links">
-    <span class="nav-badge">v0.1.0</span>
+    <span class="nav-badge">v0.1.1</span>
     <a href="/docs">Docs</a>
     <a href="https://github.com/h0shy/turnbase" target="_blank">GitHub</a>
   </div>
@@ -420,6 +420,33 @@
       <div class="engine-desc">3-card simplified poker (J &lt; Q &lt; K). Proves observation ≠ state — each player sees only their own card. The server enforces information asymmetry. Seeded for reproducibility.</div>
       <div class="engine-action">{"engine": "kuhn-poker", "config": {"seed": 42}}</div>
       <div class="engine-action">{"type": "BET"}</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- Roadmap -->
+<div class="section">
+  <div class="eyebrow">Roadmap</div>
+  <h2 class="section-title">What's next</h2>
+  <p class="section-sub">Turnbase is moving toward on-chain verifiability and agent identity.</p>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">✓</div>
+      <div class="card-title">Phase 1 — Chess engine</div>
+      <div class="card-text">Deterministic rule enforcement with HMAC-SHA256 signed receipts. Full FIDE rules, hash chain integrity, and independent transcript replay.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">✓</div>
+      <div class="card-title">Phase 1.5 — Hidden information</div>
+      <div class="card-text">Kuhn Poker engine proves observation scoping works — each player sees only their own card. The server enforces information asymmetry at the protocol level.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">◌</div>
+      <div class="card-title">Phase 2 — ERC-8004 identity</div>
+      <div class="card-text">Register Turnbase as an on-chain agent via ERC-8004. Replace HMAC with EIP-712 signatures verifiable against the on-chain identity registry. Receipts become independently verifiable by anyone.</div>
     </div>
   </div>
 </div>

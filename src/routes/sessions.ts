@@ -45,7 +45,7 @@ sessions.post('/', async (c) => {
     createdAt: Date.now(),
   };
 
-  setSession(session);
+  await setSession(session);
 
   return c.json({
     sessionId: session.id,
@@ -59,8 +59,8 @@ sessions.post('/', async (c) => {
 });
 
 // GET /sessions/:id — session summary
-sessions.get('/:id', (c) => {
-  const session = getSession(c.req.param('id'));
+sessions.get('/:id', async (c) => {
+  const session = await getSession(c.req.param('id'));
   if (!session) return c.json({ error: 'Session not found' }, 404);
 
   return c.json({
@@ -82,7 +82,7 @@ sessions.get('/:id', (c) => {
 
 // POST /sessions/:id/join — join as a participant
 sessions.post('/:id/join', async (c) => {
-  const session = getSession(c.req.param('id'));
+  const session = await getSession(c.req.param('id'));
   if (!session) return c.json({ error: 'Session not found' }, 404);
   if (session.status !== 'waiting') return c.json({ error: `Session is ${session.status}` }, 409);
 
@@ -114,7 +114,7 @@ sessions.post('/:id/join', async (c) => {
     };
   }
 
-  setSession(updated);
+  await setSession(updated);
 
   return c.json({
     sessionId: session.id,
@@ -131,8 +131,8 @@ sessions.post('/:id/join', async (c) => {
 });
 
 // GET /sessions/:id/observation?playerId= — player-scoped state view
-sessions.get('/:id/observation', (c) => {
-  const session = getSession(c.req.param('id'));
+sessions.get('/:id/observation', async (c) => {
+  const session = await getSession(c.req.param('id'));
   if (!session) return c.json({ error: 'Session not found' }, 404);
 
   const playerId = c.req.query('playerId');
@@ -167,7 +167,7 @@ sessions.get('/:id/observation', (c) => {
 
 // POST /sessions/:id/actions — submit an action
 sessions.post('/:id/actions', async (c) => {
-  const session = getSession(c.req.param('id'));
+  const session = await getSession(c.req.param('id'));
   if (!session) return c.json({ error: 'Session not found' }, 404);
   if (session.status !== 'active') return c.json({ error: `Session is ${session.status}` }, 409);
 
@@ -220,7 +220,7 @@ sessions.post('/:id/actions', async (c) => {
   const terminal = engine.isTerminal(newState);
   const result = terminal ? engine.getResult(newState) : null;
 
-  setSession({
+  await setSession({
     ...session,
     state: newState,
     stateHash: stateHashAfter,
@@ -244,8 +244,8 @@ sessions.post('/:id/actions', async (c) => {
 });
 
 // GET /sessions/:id/transcript — append-only action log
-sessions.get('/:id/transcript', (c) => {
-  const session = getSession(c.req.param('id'));
+sessions.get('/:id/transcript', async (c) => {
+  const session = await getSession(c.req.param('id'));
   if (!session) return c.json({ error: 'Session not found' }, 404);
 
   return c.json({
@@ -260,8 +260,8 @@ sessions.get('/:id/transcript', (c) => {
 });
 
 // GET /sessions/:id/receipt/:turn — signed receipt for a specific turn
-sessions.get('/:id/receipt/:turn', (c) => {
-  const session = getSession(c.req.param('id'));
+sessions.get('/:id/receipt/:turn', async (c) => {
+  const session = await getSession(c.req.param('id'));
   if (!session) return c.json({ error: 'Session not found' }, 404);
 
   const turn = parseInt(c.req.param('turn'), 10);

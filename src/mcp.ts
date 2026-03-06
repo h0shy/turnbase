@@ -89,9 +89,7 @@ async function verifyTranscript(sessionId: string): Promise<VerifyResult> {
 
   // Determine initial state
   let state: unknown;
-  if (session.engine === 'chess') {
-    state = engine.initialState(session.config ?? {}, []);
-  } else if (session.verificationData?.initialState) {
+  if (session.verificationData?.initialState) {
     state = session.verificationData.initialState;
   } else {
     // Game still active — can only verify hash chain consistency
