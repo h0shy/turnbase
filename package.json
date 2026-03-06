@@ -2,6 +2,7 @@
   "name": "turnbase",
   "version": "0.1.0",
   "description": "A verifiable interaction runtime for structured multi-party protocols",
+  "license": "MIT",
   "type": "module",
   "bin": {
     "turnbase-mcp": "./dist/mcp.js"
