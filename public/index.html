@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Turnbase — Verifiable Interaction Runtime</title>
-  <meta name="description" content="A neutral, verifiable execution layer for structured multi-party protocols. Deterministic rule enforcement, per-player observation scoping, and cryptographically signed transcripts.">
+  <meta name="description" content="A neutral, verifiable execution layer for structured multi-party protocols. Deterministic rule enforcement, per-player observation scoping, EIP-712 signed receipts, and on-chain agent identity via ERC-8004.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -299,7 +299,7 @@
 <div class="hero">
   <div class="hero-tag">Open protocol</div>
   <h1>A neutral execution layer<br><em>for structured interactions</em></h1>
-  <p>Deterministic rule enforcement, per-player observation scoping, and cryptographically signed transcripts — for any structured multi-party protocol.</p>
+  <p>Deterministic rule enforcement, per-player observation scoping, and EIP-712 signed receipts backed by on-chain agent identity — for any structured multi-party protocol.</p>
   <div class="hero-btns">
     <a class="btn btn-primary" href="https://github.com/h0shy/turnbase" target="_blank">View on GitHub</a>
     <a class="btn btn-secondary" href="/docs">API Reference</a>
@@ -429,24 +429,29 @@
 <!-- Roadmap -->
 <div class="section">
   <div class="eyebrow">Roadmap</div>
-  <h2 class="section-title">What's next</h2>
-  <p class="section-sub">Turnbase is moving toward on-chain verifiability and agent identity.</p>
+  <h2 class="section-title">Built in the open</h2>
+  <p class="section-sub">Each phase adds a new dimension of verifiability to the protocol.</p>
 
   <div class="cards">
     <div class="card">
       <div class="card-icon">✓</div>
-      <div class="card-title">Phase 1 — Chess engine</div>
-      <div class="card-text">Deterministic rule enforcement with HMAC-SHA256 signed receipts. Full FIDE rules, hash chain integrity, and independent transcript replay.</div>
+      <div class="card-title">Deterministic engines</div>
+      <div class="card-text">Chess with full FIDE rules. Hash chain integrity and independent transcript replay. Every game is replayable from the initial state.</div>
     </div>
     <div class="card">
       <div class="card-icon">✓</div>
-      <div class="card-title">Phase 1.5 — Hidden information</div>
-      <div class="card-text">Kuhn Poker engine proves observation scoping works — each player sees only their own card. The server enforces information asymmetry at the protocol level.</div>
+      <div class="card-title">Hidden information</div>
+      <div class="card-text">Kuhn Poker proves observation scoping works — each player sees only their own card. The server enforces information asymmetry at the protocol level.</div>
     </div>
     <div class="card">
       <div class="card-icon">✓</div>
-      <div class="card-title">Phase 2 — ERC-8004 identity</div>
-      <div class="card-text">Turnbase is a registered on-chain agent on Base via ERC-8004. Receipts are EIP-712 signed — anyone can verify signatures against the on-chain identity. No shared secrets, no trust assumptions.</div>
+      <div class="card-title">On-chain agent identity</div>
+      <div class="card-text">Registered on Base via ERC-8004. Receipts are EIP-712 signed — anyone can verify signatures against the on-chain identity. No shared secrets, no trust assumptions.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">◌</div>
+      <div class="card-title">What's next</div>
+      <div class="card-text">On-chain reputation from completed sessions. More engines. A typed client SDK. The protocol is engine-agnostic — any structured multi-party interaction can plug in.</div>
     </div>
   </div>
 </div>
