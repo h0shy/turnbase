@@ -1,7 +1,6 @@
 import { readFileSync, existsSync } from 'node:fs';
-import { serve } from '@hono/node-server';
 
-// Load env from Render secret file if present
+// Load env from Render secret file BEFORE any other imports
 const SECRET_FILE = '/etc/secrets/env';
 if (existsSync(SECRET_FILE)) {
   for (const line of readFileSync(SECRET_FILE, 'utf-8').split('\n')) {
@@ -10,7 +9,9 @@ if (existsSync(SECRET_FILE)) {
   }
 }
 
-import { app } from './app';
+// Dynamic import so env vars are set before store.ts initializes Redis
+const { app } = await import('./app.js');
+const { serve } = await import('@hono/node-server');
 
 const PORT = parseInt(process.env.PORT ?? '3000', 10);
 
