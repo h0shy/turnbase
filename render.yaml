@@ -3,7 +3,7 @@ services:
     name: turnbase
     runtime: node
     buildCommand: npm install
-    startCommand: set -a && source /etc/secrets/env && set +a && npx tsx src/index.ts
+    startCommand: npx tsx src/index.ts
     envVars:
       - key: NODE_ENV
         value: production

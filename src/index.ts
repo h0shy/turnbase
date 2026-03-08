@@ -1,4 +1,15 @@
+import { readFileSync, existsSync } from 'node:fs';
 import { serve } from '@hono/node-server';
+
+// Load env from Render secret file if present
+const SECRET_FILE = '/etc/secrets/env';
+if (existsSync(SECRET_FILE)) {
+  for (const line of readFileSync(SECRET_FILE, 'utf-8').split('\n')) {
+    const match = line.match(/^(\w+)=["']?(.*?)["']?\s*$/);
+    if (match) process.env[match[1]] = match[2];
+  }
+}
+
 import { app } from './app';
 
 const PORT = parseInt(process.env.PORT ?? '3000', 10);
